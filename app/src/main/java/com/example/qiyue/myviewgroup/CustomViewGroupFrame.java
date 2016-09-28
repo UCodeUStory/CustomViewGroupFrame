@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.*;
+import android.widget.LinearLayout;
 
 /**
  * Created by qiyue on 2016/9/27 0027.
@@ -19,6 +21,8 @@ import android.view.ViewGroup;
  *   (自定义ViewGroup需要对Margin支持，自定义VIew需要对padding支持)
  *
  *   存在bug 对marginright 不知道怎么支持，match_parent时还好说，具体数值时就不好说
+ *
+ *   已解决match_patent margin问题
  */
 public class CustomViewGroupFrame extends ViewGroup{
     public CustomViewGroupFrame(Context context) {
@@ -66,13 +70,22 @@ public class CustomViewGroupFrame extends ViewGroup{
         int top = 0;
         int count = getChildCount();
 
-        Log.e("qiyue", "childCount="+count + "");
+//        Log.e("qiyue", "childCount="+count + "");
         for (int i = 0;i<count;i++){
             View child = getChildAt(i);
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
             int l1 = params.leftMargin;
             int t2 = params.topMargin;
-            int r3 = l1 + child.getMeasuredWidth();
+//            Log.i("qiyue","width="+child.getMeasuredWidth());
+            LayoutParams lp =  child.getLayoutParams();
+            int r3;
+            if (lp.width == LinearLayout.LayoutParams.MATCH_PARENT) {
+                 r3 = child.getMeasuredWidth()-params.rightMargin;
+                 lp.width = r3 -l1;
+                 child.setLayoutParams(lp);  //解决TextView内容不居中问题
+            }else{
+                 r3 = l1 + child.getMeasuredWidth();
+            }
             int b4 = t2 + child.getMeasuredHeight();
             top = bottom + t2;
             bottom = bottom + t2 + child.getMeasuredHeight();
