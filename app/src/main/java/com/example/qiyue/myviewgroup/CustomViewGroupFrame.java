@@ -74,13 +74,17 @@ public class CustomViewGroupFrame extends ViewGroup{
         for (int i = 0;i<count;i++){
             View child = getChildAt(i);
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
-            int l1 = params.leftMargin;
-            int t2 = params.topMargin;
+            int l1 = 0;
+            int t2 = 0;
+
+            l1 = params.leftMargin + getPaddingLeft();
+            t2 = params.topMargin + getPaddingTop();
+
 //            Log.i("qiyue","width="+child.getMeasuredWidth());
             LayoutParams lp =  child.getLayoutParams();
             int r3;
             if (lp.width == LinearLayout.LayoutParams.MATCH_PARENT) {
-                 r3 = child.getMeasuredWidth()-params.rightMargin;
+                 r3 = child.getMeasuredWidth()-params.rightMargin -getPaddingRight();
                  lp.width = r3 -l1;
                  child.setLayoutParams(lp);  //解决TextView内容不居中问题
             }else{

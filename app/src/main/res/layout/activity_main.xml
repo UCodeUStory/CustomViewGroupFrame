@@ -7,6 +7,10 @@
 
     <com.example.qiyue.myviewgroup.CustomViewGroupFrame
         android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="#2b2e99"
         android:layout_height="match_parent">
         <TextView
             android:layout_width="match_parent"
@@ -37,12 +41,13 @@
             android:background="#2daf47"
             android:layout_height="100dp" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:text="wrap_content,padding_left 10,padding_right 10"
             android:textSize="15sp"
             android:gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:background="#9c2daf"
